@@ -1,0 +1,4 @@
+development:
+    dialect: postgres
+    datasource: host=${DB_HOST} port=5432 dbname=wanakudb user=postgres password=mysecretpassword sslmode=disable
+    dir: resources/migrations

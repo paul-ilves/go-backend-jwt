@@ -1,4 +1,19 @@
-# Wanaku API
+# Registration service API on Go
+
+This is an example Go backend service I've created to show my junior colleagues on how to solve ordinary challenges
+appearing when you're a writing a back-end service on Go:
+* User authentication/authorization
+* JWT
+* Idiomatic REST endpoints
+* DB connection
+* DB migrations
+* multi-tier architecture (sometimes called hexagonal architecture)
+* DDD in Go
+* error management in API
+
+...and more!
+
+I tried to use as few fancy frameworks as possible to make it Go-idiomatic, but I couldn't resist using Fiber for REST and sqlx for executing SQL because they both save so much lines of code which were otherwise be wasted in boilerplate code. Hope this doesn't spoil too much the beauty of Go-purism ;) 
 
 ## Deployment
 

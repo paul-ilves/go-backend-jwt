@@ -45,5 +45,6 @@ func toDTO(u repository.User) UserDto {
 		LastName:    u.LastName,
 		Email:       u.Email,
 		PhoneNumber: u.PhoneNumber,
+		Role:        u.Role.String,
 	}
 }

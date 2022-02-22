@@ -1,15 +1,22 @@
 ### GET all users
 GET localhost:8888/api/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjM1ODQ3MjkwLCJpYXQiOjE2MzU4NDcxMTAsInJvbGUiOiJhZG1pbiJ9.QEhWdNvmHfjtTdVvVNdnRnvE_a5_4D3M8jg32_wOyBo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjQwNjQzNjA5LCJpYXQiOjE2NDA2NDE4MDksInJvbGUiOiJjdXN0b21lciJ9.HUMIh02QyRi8y-5ALSc39dem7TCw6fbEz8DsONd8gp4
 
 ### GET user by ID
 GET localhost:8888/api/users/5
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjQxMjY4ODk1LCJpYXQiOjE2NDExODI0OTUsInJvbGUiOiJjdXN0b21lciJ9.lu9KZikMQTueEaOM_dBdEwq3drOCP7VR-o6QiM8WUO8
 
 ### GET user by non-existing ID
-GET localhost:8888/api/users/1
+GET localhost:8888/api/users/777
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjQwNjQzNjA5LCJpYXQiOjE2NDA2NDE4MDksInJvbGUiOiJjdXN0b21lciJ9.HUMIh02QyRi8y-5ALSc39dem7TCw6fbEz8DsONd8gp4
+
+### GET current user
+GET localhost:8888/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwiZXhwIjoxNjQxNDkxNDgwLCJpYXQiOjE2NDE0MDUwODAsInJvbGUiOiJjdXN0b21lciJ9.z_fW4OEgjW8q1bW_q0iq4Lygwlfd5ZMYiVxH3urwoFQ
 
 ### GET non-existing path
 GET localhost:8888/api/sdfsdfs
@@ -24,13 +31,22 @@ Content-Type: application/json
   "password": "password123"
 }
 
+### check against a proper password 2
+POST http://localhost:8888/api/login
+Content-Type: application/json
+
+{
+  "email": "degtyaryov@sbu.gov.ua",
+  "password": "password123"
+}
+
 ### check against an invalid password
 POST http://localhost:8888/api/login
 Content-Type: application/json
 
 {
   "email": "strelok@stalker.com",
-  "password": "thispasswordiswrong",
+  "password": "thispasswordiswrong"
 }
 
 ### check against a non-existing user
@@ -52,4 +68,13 @@ Content-Type: application/json
   "phoneNumber": "111-11-111",
   "email": "sakharov2@science.ua",
   "password": "dada123"
+}
+
+### refresh access token
+POST http://localhost:8888/api/refresh
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjM2NTkxMDA3LCJpYXQiOjE2MzY1ODkyMDcsInJvbGUiOiJjdXN0b21lciJ9.ngFaek8dAMFgZ-CIcWWgTiA27bJRrFWwftyR70DCnlM",
+  "refreshToken": "f1baff8fbb8b550ace24fd3be0530ee6b73bcd0cfccb273d87a08a52582e597c"
 }

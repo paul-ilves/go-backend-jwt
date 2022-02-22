@@ -3,8 +3,8 @@ package routes
 import (
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v3"
-	"github.com/paul-ilves/wanaku-api-go/controllers"
-	"os"
+	"github.com/paul-ilves/wanaku-api-go/config"
+	"github.com/paul-ilves/wanaku-api-go/handlers"
 )
 
 func SetupRoutes(a *fiber.App) {
@@ -12,18 +12,19 @@ func SetupRoutes(a *fiber.App) {
 
 	//create routes group
 	router := a.Group("/api")
-	router.Post("/login", controllers.HandleLogin)
-	router.Post("/logout", controllers.HandleLogout)
-	router.Post("/register", controllers.HandleRegister)
+	router.Post("/login", handlers.HandleLogin)
+	router.Post("/logout", handlers.HandleLogout)
+	router.Post("/register", handlers.HandleRegister)
+	router.Post("/refresh", handlers.RefreshToken)
 
 	router.Use(jwtware.New(jwtware.Config{
 		SigningMethod: "HS256",
-		SigningKey:    []byte(os.Getenv("JWT_SECRET")),
+		SigningKey:    []byte(config.C.JWTSecret),
 	}))
 
-	router.Get("/users", controllers.HandleGetAllUsers)
-	//router.Get("/users/me", controllers.HandleLoggedUser) // todo implement
-	router.Get("/users/:userID", controllers.HandleGetUser)
+	router.Get("/users", handlers.HandleGetAllUsers)
+	router.Get("/users/me", handlers.HandleGetCurrentUser)
+	router.Get("/users/:userID", handlers.HandleGetUser)
 
 	router.Use(handlePageNotFound)
 	a.Use(handlePageNotFound)

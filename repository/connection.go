@@ -11,6 +11,7 @@ var (
 	client *sqlx.DB
 )
 
+// OpenDBConnection opens a DB connection. Call it each time you're about to interact with the DB.
 func OpenDBConnection() {
 	db, err := PostgreSQLConnection()
 	if err != nil {
@@ -21,6 +22,7 @@ func OpenDBConnection() {
 	client = db
 }
 
+// CloseDBConnection terminates a DB connection. Call it each time you're done interacting with the DB.
 func CloseDBConnection() {
 	err := client.Close()
 	if err != nil {
@@ -30,8 +32,9 @@ func CloseDBConnection() {
 	client = nil
 }
 
+// PostgreSQLConnection returns a pointer to sqlx.DB with connection set to a PostgreSQL instance.
 func PostgreSQLConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Connect("pgx", config.C.DBConnectionURL)
+	db, err := sqlx.Connect("pgx", config.C.DBUrl())
 	if err != nil {
 		return nil, fmt.Errorf("error, not connected to database, %w", err)
 	}

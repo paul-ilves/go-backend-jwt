@@ -49,6 +49,21 @@ CREATE TABLE "user"
             REFERENCES "organisation" ("id")
 );
 
+CREATE TABLE "refresh_token"
+(
+    "id"         serial,
+    "sign"       varchar(128),
+    "device_id"  varchar(64),
+    "issued_at"  timestamp,
+    "expires_at" timestamp,
+    "valid"      boolean,
+    "user_id"    integer,
+    PRIMARY KEY ("id"),
+    CONSTRAINT "FK_refresh_token.user_id"
+        FOREIGN KEY ("user_id")
+            REFERENCES "user" ("id")
+);
+
 CREATE TABLE "address"
 (
     "id"            bigserial,
@@ -154,20 +169,6 @@ CREATE TABLE "order_item"
     CONSTRAINT "FK_order_item.order_id"
         FOREIGN KEY ("order_id")
             REFERENCES "order" ("id")
-);
-
-CREATE TABLE "refresh_token"
-(
-    "id"         serial,
-    "sign"       varchar(128),
-    "device_id"  varchar(64),
-    "issued_at"  timestamp,
-    "expires_at" timestamp,
-    "user_id"    integer,
-    PRIMARY KEY ("id"),
-    CONSTRAINT "FK_refresh_token.user_id"
-        FOREIGN KEY ("user_id")
-            REFERENCES "user" ("id")
 );
 
 

@@ -1,19 +1,20 @@
-# Registration service API on Go
+# Web Application Boilerplate for Go
 
-This is an example Go backend service I've created to show my junior colleagues on how to solve ordinary challenges
-appearing when you're a writing a back-end service on Go:
+This is project is my daily battle tool in building scalable, secure, robust Go web applications. Although maybe not exactly a framework, but the latter word sounds catchier than "project boilerplate", so I took the liberty to call it this way. It has all you need to get started with your project! What does it have out of the box?
 * User authentication/authorization
-* JWT
-* Idiomatic REST endpoints
-* DB connection
-* DB migrations
+* JWT with Refresh Token logic
+* Idiomatic REST endpoints thanks to Fiber framework 
+* SQL connectivity via sqlx
+* DB migration files
 * multi-tier architecture (sometimes called hexagonal architecture)
 * DDD in Go
+* Propery project structuring for a Go web application
+* Use of .env config files
 * error management in API
 
 ...and more!
 
-I tried to use as few fancy frameworks as possible to make it Go-idiomatic, but I couldn't resist using Fiber for REST and sqlx for executing SQL because they both save so much lines of code which were otherwise be wasted in boilerplate code. Hope this doesn't spoil too much the beauty of Go-purism ;) 
+I tried to use as few fancy frameworks as possible to make it Go-idiomatic, with the small exception of using Fiber for REST and sqlx for making SQL queries more concise. Hope this doesn't spoil too much the beauty of Go-purism ;) 
 
 ## Deployment
 
@@ -35,5 +36,9 @@ I tried to use as few fancy frameworks as possible to make it Go-idiomatic, but 
 
 ### DB stack:
 
-- Postgresql
-- rubenv/sql-migrate 
+- Database: Postgresql
+- Migration tool: rubenv/sql-migrate 
+
+
+### .env file
+I intentionally left the .env file so that you can start your Database and Authentication without much trouble. The values inside there are purely for local development. Needless to say, you shouldn't ever be sharing .env files in your production ;)
